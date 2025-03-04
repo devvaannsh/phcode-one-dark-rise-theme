@@ -1,0 +1,482 @@
+/*
+ * Phoenix Code - One Dark Rise Theme
+ * 
+ * Based on Atom's One Dark theme
+ * A dark theme with vibrant syntax highlighting, fully reinvented for phcode
+ */
+
+/* Core UI Colors
+ * These variables control the fundamental visual elements of the editor
+ */
+@background: #282c34;
+@foreground: #abb2bf; // (Not for font color, but UI elements)
+
+@comment: #5c6370;
+@comment-active: #6c7380; // Applied when cursor is on a commented line
+
+@cursor: #528bff;
+
+/* Active Line Highlighting */
+@activeline-background: #2c313a;
+@activeline-foreground: #abb2bf;
+
+/* Selected Code Highlighting */
+@selected-background: rgba(99, 123, 156, 0.3);
+
+/* UI Component Colors */
+// Title Bar
+@titlebar-background: #21252b;
+@titlebar-foreground: #9da5b4;
+
+// Status Bar
+@status-bar-background: #21252b;
+@status-bar-foreground: #9da5b4;
+
+// Sidebar - Houses file tree and working files
+@sidebar-background: #21252b;
+@sidebar-foreground: #9da5b4;
+@sidebar-active-file-foreground: #61afef; // Highlights the current working file
+
+// Toolbar - Vertical panel on the right
+@toolbar-background: #21252b;
+
+/* Editor Gutter 
+ * Controls the area containing line numbers and code folding indicators
+ */
+@gutter-background: #282c34;
+@active-gutter-background: #2c313a;
+@line-number: #636d83;
+@active-line-number: #abb2bf;
+
+@border: #181a1f; // Used for UI element separation
+
+/* Search Highlighting
+ * These colors are used when using the find/replace functionality
+ */
+@searching-background: #e5c07b;
+@searching-foreground: #282c34;
+@searching-match-background: #e06c75;
+@searching-match-foreground: #ffffff;
+
+/* Brackets Highlighting
+ * These colors are also used for Matching-Tags
+ */
+@matchingbracket-background: rgba(99, 123, 156, 0.3);
+@matchingbracket-color: #abb2bf;
+@active-matchingbracket-color: #61afef;
+@active-matchingbracket-background: rgba(99, 123, 156, 0.4);
+
+/* Syntax Highlighting
+ * These variables control the colors of different code elements in the editor.
+ * Customizing these will change how your code looks.
+ */
+
+@keyword: #c678dd; // Programming keywords like 'function', 'const', 'if', 'for'
+@definition: #61afef; // Function, variable, class names when they're being defined
+@variable: #e06c75; // Global/Predefined variables in your code
+@variable2: #abb2bf; // Local variables
+@variable3: #e5c07b; // used to over write any default colors
+@string: #98c379; // Text between quotes: "example" or 'example'
+@string2: #98c379; // Special string variants like regex literals and LaTeX math
+@tag: #e06c75; // HTML/XML tags like <div> or <body>
+@type: #e5c07b; // Data types in statically typed languages like 'int', 'char', 'bool'
+@number: #d19a66; // Numeric values: 42, 1.5, 0xFF
+@operator: #56b6c2; // Mathematical/logical operators: +, -, !, ===
+@meta: #abb2bf; // Meta characters in regex and HTML doctype, include/import statements
+@attribute: #d19a66; // HTML attributes like 'class' or 'src'
+@property: #abb2bf; // Object properties and CSS properties - changed to gray
+@link: #61afef; // Hyperlinks in markdown
+@header: #e06c75; // Markdown headers (#, ##, etc.)
+@error: #f7768e; // Text that represents an error in your code
+@error-background: #f7768e1a; // Background highlight for error text
+@hex-color: #abb2bf; // Hexadecimal color codes - lightened to be more visible
+
+// CSS selector colors
+@css-class: #d19a66; // .class selectors should be orange like in Atom
+
+/* ------------------------------------------------------------------- */
+/* Base Styles
+ * The following CSS rules implement the theme using the variables defined above.
+ * Modify with CAUTION. Only Modify if necessary.
+ */
+// Styles the empty editor state
+.content #editor-holder .not-editor {
+    background-color: @background;
+}
+
+// Styles the header of each editor pane when multiple files are open
+.content #editor-holder .pane-header {
+    background-color: @background;
+    color: @foreground;
+}
+
+/* Sidebar Styling */
+// Applies consistent background to all sidebar elements
+.main-view #sidebar,
+.main-view #sidebar #mainNavBar,
+.main-view #sidebar #working-set-list-container,
+.main-view #sidebar #working-set-list-container .working-set-view-active,
+.main-view #sidebar #working-set-list-container .working-set-header,
+.main-view #sidebar #working-set-list-container .working-set-header-title,
+.main-view #sidebar #working-set-list-container .sidebar-selection,
+.main-view #sidebar #project-files-container,
+.main-view #sidebar #project-files-header,
+.main-view #sidebar #project-files-header #project-dropdown-toggle {
+    background-color: @sidebar-background;
+}
+
+// Creates a visual separator between working files and project files
+.main-view #sidebar #working-set-list-container {
+    border-bottom: 1px solid @border;
+}
+
+// Removes default selection border in sidebar
+.main-view #sidebar #working-set-list-container .sidebar-selection {
+    border: none;
+}
+
+/* Sidebar Text Styling */
+// Sets color for all text elements in the sidebar
+.main-view #sidebar #project-files-container ul li a span,
+.main-view #sidebar #project-files-header #project-dropdown-toggle span,
+.main-view #sidebar #working-set-list-container .working-set-view .working-set-header span,
+.main-view #sidebar #working-set-list-container .working-set-view .open-files-container ul li a span {
+    color: @sidebar-foreground;
+}
+
+// Highlights the currently selected file and PhCode.io link
+.main-view #sidebar #working-set-list-container .working-set-view .open-files-container ul .selected a span,
+.main-view #sidebar #mainNavBar #phcode-io-main-nav {
+    color: @sidebar-active-file-foreground;
+}
+
+/* Status Bar */
+// Ensures consistent styling across all status bar elements
+#status-bar,
+#status-bar #status-info,
+#status-bar #status-info #status-file,
+#status-bar #status-indicators,
+#status-bar #status-indicators #status-overwrite {
+    background-color: @status-bar-background;
+    color: @status-bar-foreground;
+}
+
+/* Toolbar */
+#main-toolbar,
+#main-toolbar #plugin-icons-bar {
+    background-color: @toolbar-background;
+}
+
+/* Title Bar */
+.content #titlebar {
+    background-color: @titlebar-background;
+}
+
+.content #titlebar .nav li a {
+    color: @titlebar-foreground;
+}
+
+/* Main Editor Window */
+// Adds a separator between sidebar and editor content
+.content {
+    border-left: 1px solid @border;
+}
+
+// Sets the main editor background and text color
+.CodeMirror,
+.CodeMirror-scroll {
+    background-color: @background;
+    color: @foreground;
+}
+
+// Styles for code selection
+.CodeMirror-selected {
+    background-color: @selected-background !important;
+}
+
+// Styles line numbers
+.CodeMirror-linenumber {
+    color: @comment;
+}
+
+// LESS változók színezése - DOM alapján pontosítva
+.cm-variable-2 {
+    color: @tag !important; // Piros színű LESS változók (@background, stb.)
+}
+
+// Függvénynevek színezése - DOM alapján pontosítva
+.cm-variable.cm-callee {
+    color: @operator !important; // türkiz színű függvénynevek (rgba, stb.)
+}
+
+// CSS szelektorok - Javítva az Atom színvilága szerint
+.cm-qualifier {
+    color: @css-class !important; // CSS class szelektorok (.class) - narancssárga
+}
+
+.cm-builtin {
+    color: @definition !important; // CSS ID szelektorok (#id)
+}
+
+.cm-tag {
+    color: @tag !important; // CSS elem szelektorok (div, span)
+}
+
+// CSS property (tulajdonság) színezés szürkére állítása
+.cm-property {
+    color: @property !important; // CSS tulajdonságnevek (background-color, stb.) szürke színnel
+}
+
+// Background és color tulajdonságértékek szürkére állítása
+.cm-atom:not(.cm-meta):not(.cm-variable-2) {
+    color: @hex-color !important; // Hexadecimális színkódok és tulajdonságértékek
+}
+
+// Számértékek
+.cm-number {
+    color: @number !important; // Számok (99, 123, stb.)
+}
+
+// CSS property-érték párok javítása
+.cm-property + .cm-atom {
+    color: @hex-color !important; // Az értékek szürkék legyenek, ne türkizek
+}
+
+// Speciális függvénynevek színezése
+.cm-variable.cm-callee, .cm-callee {
+    color: @operator !important; // Függvénynevek mint rgba, hsla, stb. türkiz színnel
+}
+
+// Kommentek
+.cm-comment {
+    color: @comment !important;
+    font-style: italic;
+}
+
+.cm-comment.cm-overlay.cm-phcode-indent-guides {
+    color: fade(@comment, 20%) !important; // Halvány behúzásjelölők a kommentekben
+}
+
+// Egyéb szintaxis elemek
+.cm-keyword {
+    color: @keyword !important;
+}
+
+.cm-def {
+    color: @definition !important;
+}
+
+span.cm-variable:not(.cm-callee) {
+    color: @variable !important;
+}
+
+span.cm-variable-3 {
+    color: @variable3 !important;
+}
+
+.cm-link,
+.cm-link.cm-variable-2 {
+    color: @link !important;
+}
+
+.cm-string.cm-variable-2.cm-url {
+    color: @link !important;
+}
+
+.cm-operator {
+    color: @operator !important;
+}
+
+.cm-string {
+    color: @string !important;
+}
+
+.cm-string-2 {
+    color: @string2 !important;
+}
+
+.cm-meta {
+    color: @meta !important;
+}
+
+.cm-attribute {
+    color: @attribute !important;
+}
+
+.cm-header {
+    color: @header !important;
+}
+
+.cm-hr {
+    color: @comment !important;
+}
+
+.cm-link {
+    color: @link !important;
+}
+
+// Error highlighting
+.cm-error {
+    color: @error !important;
+    background-color: @error-background !important;
+}
+
+.cm-quote {
+    color: @keyword !important;
+}
+
+.cm-em {
+    color: @definition !important;
+}
+
+.cm-strong {
+    color: @number !important;
+}
+
+.cm-image {
+    color: @tag !important;
+}
+
+.cm-image-marker {
+    color: @definition !important;
+}
+
+.cm-type {
+    color: @type !important;
+}
+
+// Styles for matching HTML tags
+.CodeMirror-matchingtag {
+    background-color: @matchingbracket-background !important;
+    color: @matchingbracket-color !important;
+}
+
+// Enhanced visibility for matching tags in the active line
+.CodeMirror-activeline .CodeMirror-matchingtag {
+    color: @active-matchingbracket-color !important;
+    background-color: @active-matchingbracket-background !important;
+}
+
+// Styles for matching brackets (parentheses, square brackets, etc.)
+.CodeMirror-matchingbracket {
+    outline: none;
+    border-bottom: 1px solid @matchingbracket-color;
+    color: @matchingbracket-color !important;
+    background-color: @matchingbracket-background !important;
+}
+
+.CodeMirror-activeline .CodeMirror-matchingbracket {
+    color: @active-matchingbracket-color !important;
+    background-color: @active-matchingbracket-background !important;
+}
+
+// Code folding marker styling
+.CodeMirror-foldmarker {
+    background-color: @background;
+    color: @foreground;
+    border: none;
+}
+
+.CodeMirror-activeline .CodeMirror-foldmarker {
+    background-color: @activeline-background;
+    color: @activeline-foreground;
+    border: none;
+}
+
+// Active line comment color
+.CodeMirror-activeline .cm-comment {
+    color: @comment-active !important;
+}
+
+// Cursor styling for normal mode
+.CodeMirror .CodeMirror-cursor {
+    border-left: 2px solid @cursor !important;
+}
+
+// Cursor styling for overwrite (insert) mode
+.CodeMirror .CodeMirror-overwrite .CodeMirror-cursor {
+    border-left: none !important;
+    border-bottom: 2px solid @cursor;
+    width: 1.2ex;
+}
+
+// Gutter styling (area with line numbers)
+.CodeMirror .CodeMirror-gutters {
+    background-color: @gutter-background;
+    border-right: 0;
+}
+
+.CodeMirror-gutter-elt {
+    color: @line-number !important;
+}
+
+.CodeMirror-activeline .CodeMirror-gutter-elt {
+    background-color: @active-gutter-background !important;
+    color: @active-line-number !important;
+}
+
+// Active line background
+.CodeMirror-activeline-background {
+    background-color: @activeline-background !important;
+}
+
+// Styles for search results
+.CodeMirror-searching {
+    background-color: @searching-background !important;
+    color: @searching-foreground !important;
+}
+
+// Highlights the current search match
+.CodeMirror-searching.searching-current-match {
+    background-color: @searching-match-background !important;
+    color: @searching-match-foreground !important;
+}
+
+// Color preview ikonok
+.ico-cssColorPreview {
+    border: 1px solid @border;
+    border-radius: 2px;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: @background;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(99, 109, 131, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(99, 109, 131, 0.8);
+}
+
+// Vízszintes elválasztó formázása
+.main-view .horz-resizer,
+body .horz-resizer,
+.horz-resizer {
+    background-color: @border !important; // Az elválasztó háttérszíne
+    width: 2px !important; // Az elválasztó vastagsága
+    opacity: 1 !important; // Láthatóság biztosítása
+    cursor: col-resize !important; // Egérkurzor megjelenése
+    z-index: 100 !important; // Biztosítjuk, hogy más elemek fölött legyen
+    
+    // Lebegés effektus - sárgára állítva
+    &:hover {
+        background-color: @variable3 !important; // Lebegéskor sárga színű
+        width: 2px !important; // Lebegéskor vastagabb
+    }
+    
+    // Aktív állapot (húzás közben)
+    &:active {
+        background-color: @variable3 !important; // Aktív állapotban is sárga
+        width: 5px !important; // Húzás közben még vastagabb
+    }
+}
+

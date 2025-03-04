@@ -1,20 +1,20 @@
 {
-    "title": "Name of the theme",
-    "name": "github-<owner>-<repo>",
-    "description": "A sample dark theme.",
-    "version": "0.0.1",
+    "title": "One Dark Rise Theme",
+    "name": "github-riseindustries-phcode-one-dark-rise",
+    "description": "A rised dark theme based on Atom's One Dark with vibrant syntax highlighting.",
+    "version": "1.1.0",
     "license": "MIT",
-    "author": "your name (https://github.com/<your github id>)",
-    "homepage": "<project web page url or this github repo url if no website available>",
+    "author": "Your Name (https://github.com/riseindustries)",
+    "homepage": "https://github.com/riseindustries/phcode-one-dark-rise",
     "engines": {
         "brackets": ">=2.0.0"
     },
-    "categories": "demo",
+    "categories": "theme",
     "keywords": [
-        "phcode", "theme", "demo"
+        "phcode", "theme", "dark", "atom", "one dark", "riseindustries"
     ],
     "theme": {
-        "file": "my-theme.less",
+        "file": "one-dark-rise-theme.less",
         "dark": true
     }
 }

@@ -35,7 +35,14 @@
 // Sidebar - Houses file tree and working files
 @sidebar-background: #21252b;
 @sidebar-foreground: #9da5b4;
+@sidebar-active-file-background: #2C313A;
 @sidebar-active-file-foreground: #61afef; // Highlights the current working file
+
+// the toggle buttons in the sidebar for the git branch option and the project option
+@git-branch-toggle-bg-sidebar: #21252b;
+@git-branch-toggle-fg-sidebar: #cccccc;
+@project-dropdown-toggle-bg: #21252b;
+@project-dropdown-toggle-fg: #cccccc;
 
 // Toolbar - Vertical panel on the right
 @toolbar-background: #21252b;
@@ -120,34 +127,50 @@
 .main-view #sidebar #working-set-list-container .working-set-header-title,
 .main-view #sidebar #working-set-list-container .sidebar-selection,
 .main-view #sidebar #project-files-container,
-.main-view #sidebar #project-files-header,
-.main-view #sidebar #project-files-header #project-dropdown-toggle {
-    background-color: @sidebar-background;
+.main-view #sidebar #project-files-header {
+	background-color: @sidebar-background;
+}
+
+.main-view #sidebar #project-files-header #project-dropdown-toggle,
+.main-view #sidebar #project-files-header #project-dropdown-toggle span {
+	background-color: @project-dropdown-toggle-bg;
+	color: @project-dropdown-toggle-fg;
 }
 
 // Creates a visual separator between working files and project files
 .main-view #sidebar #working-set-list-container {
-    border-bottom: 1px solid @border;
+	border-bottom: 1px solid @border;
 }
 
 // Removes default selection border in sidebar
 .main-view #sidebar #working-set-list-container .sidebar-selection {
-    border: none;
+	border: none;
 }
 
 /* Sidebar Text Styling */
 // Sets color for all text elements in the sidebar
 .main-view #sidebar #project-files-container ul li a span,
-.main-view #sidebar #project-files-header #project-dropdown-toggle span,
 .main-view #sidebar #working-set-list-container .working-set-view .working-set-header span,
 .main-view #sidebar #working-set-list-container .working-set-view .open-files-container ul li a span {
-    color: @sidebar-foreground;
+	color: @sidebar-foreground;
 }
 
 // Highlights the currently selected file and PhCode.io link
 .main-view #sidebar #working-set-list-container .working-set-view .open-files-container ul .selected a span,
 .main-view #sidebar #mainNavBar #phcode-io-main-nav {
-    color: @sidebar-active-file-foreground;
+	color: @sidebar-active-file-foreground;
+}
+
+// Style the background of the currently active file in the file explorer area
+.main-view #sidebar #project-files-container .jstree-clicked,
+.main-view #sidebar #project-files-container .filetree-selection-extension {
+	background-color: @sidebar-active-file-background;
+}
+
+// For the git branch button that appears in the sidebar
+.main-view #sidebar #project-files-header #git-branch-dropdown-toggle {
+	background-color: @git-branch-toggle-bg-sidebar;
+	color: @git-branch-toggle-fg-sidebar;
 }
 
 /* Status Bar */
@@ -475,8 +498,7 @@ body .horz-resizer,
     
     // Aktív állapot (húzás közben)
     &:active {
-        background-color: @variable3 !important; // Aktív állapotban is sárga
-        width: 5px !important; // Húzás közben még vastagabb
+        width: 0 !important; // remove the resizer when its selected
     }
 }
 
